@@ -1,26 +1,167 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overscroll-behavior-y: contain;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.service-tone .ambient-bubble,
+.service-tone .ambient-square {
+  display: none;
+}
+
+.service-tone section > .pointer-events-none.absolute {
+  display: none;
+}
+
+.service-tone .snap-section {
+  backdrop-filter: none !important;
+  background-image: none !important;
+}
+
+.service-tone #inicio,
+.service-tone #servicos,
+.service-tone #parceiros {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+}
+
+.service-tone #quem-somos,
+.service-tone #depoimentos,
+.service-tone #contato {
+  background-color: rgba(226, 232, 240, 0.65) !important;
+}
+
+.dark .service-tone #inicio,
+.dark .service-tone #servicos,
+.dark .service-tone #parceiros {
+  background-color: rgba(2, 6, 23, 0.98) !important;
+}
+
+.dark .service-tone #quem-somos,
+.dark .service-tone #depoimentos,
+.dark .service-tone #contato {
+  background-color: rgba(15, 23, 42, 0.96) !important;
+}
+
+.service-tone .reveal-card {
+  border-radius: 0.9rem !important;
+  box-shadow: 0 6px 18px -12px rgba(15, 23, 42, 0.28) !important;
+}
+
+.service-tone .rounded-3xl,
+.service-tone .rounded-4xl {
+  border-radius: 0.9rem !important;
+}
+
+.ambient-bubble {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(16, 185, 129, 0.12));
+  box-shadow: 0 10px 32px -20px rgba(2, 6, 23, 0.55);
+  animation-name: bubble-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.dark .ambient-bubble {
+  border-color: rgba(148, 163, 184, 0.22);
+  background: radial-gradient(circle at 30% 30%, rgba(148, 163, 184, 0.28), rgba(34, 211, 238, 0.1));
+}
+
+.ambient-square {
+  position: absolute;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.34);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.5), rgba(14, 165, 233, 0.1));
+  box-shadow: 0 10px 30px -18px rgba(2, 6, 23, 0.5);
+  animation-name: square-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.dark .ambient-square {
+  border-color: rgba(148, 163, 184, 0.22);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.42), rgba(16, 185, 129, 0.12));
+}
+
+@keyframes bubble-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.96);
+    opacity: 0.42;
+  }
+  25% {
+    transform: translate3d(-18px, -28px, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(12px, -44px, 0) scale(1.04);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate3d(22px, -24px, 0) scale(0.98);
+    opacity: 0.66;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(0.96);
+    opacity: 0.42;
+  }
+}
+
+@keyframes square-float {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.34;
+  }
+  25% {
+    transform: translate3d(20px, -18px, 0) rotate(8deg);
+    opacity: 0.52;
+  }
+  50% {
+    transform: translate3d(-14px, -32px, 0) rotate(16deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate3d(-22px, -16px, 0) rotate(8deg);
+    opacity: 0.56;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0.34;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ambient-bubble,
+  .ambient-square {
+    animation: none;
+  }
+
+  .reveal-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal-card {
+  opacity: var(--reveal-opacity, 0);
+  transform: translate3d(0, calc((1 - var(--reveal-progress, 0)) * 22px), 0)
+    scale(calc(0.985 + var(--reveal-progress, 0) * 0.015));
+  transition: opacity 120ms linear, transform 120ms linear;
+  will-change: transform, opacity;
 }
