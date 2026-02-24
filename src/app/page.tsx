@@ -21,7 +21,7 @@ import {
   BriefcaseBusinessIcon,
 } from "lucide-react";
 
-const WHATSAPP_NUMBER_E164 = "5511999999999";
+const WHATSAPP_NUMBER_E164 = "5519996422528";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Olá! Quero solicitar um orçamento com a Rico Assistências."
 );
@@ -182,7 +182,7 @@ export default function Page() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <a
-              href="tel:+5511999999999"
+              href="tel:+5519996422528"
               className="hidden items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800 sm:inline-flex"
             >
               <PhoneCallIcon className="h-4 w-4" />
@@ -367,7 +367,7 @@ export default function Page() {
                     Quero ser parceiro
                   </PrimaryButton>
                   <a
-                    href="tel:+5511999999999"
+                    href="tel:+5519996422528"
                     className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                   >
                     <PhoneCallIcon className="h-4 w-4" />
